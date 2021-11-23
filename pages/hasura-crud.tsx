@@ -23,6 +23,16 @@ const HasuraCRUD: VFC = () => {
   const [update_users_by_pk] = useMutation<UpdateUserMutation>(UPDATE_USER)
   const [insert_users_one] = useMutation<CreateUserMutation>(CREATE_USER, {
     update(cache, { data: { insert_users_one } }) {
+      //   (1)
+      // const existingUsers = cache.readQuery({
+      //   query: GET_USERS,
+      // })
+      //   cache.writeQuery({
+      //     query: GET_USERS,
+      //     data: { users: [insert_users_one, ...existingUsers.users] },
+      //   })
+
+      //   (2)
       const cacheId = cache.identify(insert_users_one)
       cache.modify({
         fields: {
